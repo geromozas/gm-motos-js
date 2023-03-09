@@ -1,6 +1,17 @@
 let modelos = ""
 let continuar = true
 
+function ingreso (){
+    let cliente = prompt("Ingrese su nombre");
+    alert("Bienvenid@ a GM-motos " +cliente);
+    let ingreso2 = confirm("¿Desea ver las marcas con las que trabajamos?")
+    if (ingreso2 === true){
+        preguntarModelos();
+    }else {
+        alert("Hasta la proxima "+cliente);
+    }
+}
+
 const marcas = "Ingresa la marca de motos que desea consultar: \n"+
                         "a) Kawasaki \n"+
                         "b) Yamaha \n"+
@@ -38,11 +49,12 @@ function iniciarConsulta(){
     }
 }
 
-function preguntarPrecios(){
+function preguntarModelos(){
     while(continuar){
         iniciarConsulta()
         continuar = confirm ("¿Desea consultar otro marca?")
     }
+    alert("Gracias por pasarte por GM-motos, hasta la proxima!!")
 }
 
-preguntarPrecios();
+ingreso();
