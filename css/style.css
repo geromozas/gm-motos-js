@@ -202,3 +202,17 @@ form {
     .grid-layout {
         grid-template-columns: auto; } 
 }
+
+.card {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1000px;
+    width: 30%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 0.5rem;
+    transition: box-shadow 0.5s ease;
+    cursor: pointer;
+    box-shadow: 0 0.1rem 0.4rem rgba(0,0,0,0.3);
+}
