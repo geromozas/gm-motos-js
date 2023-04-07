@@ -2,6 +2,7 @@ const sobreNosotros = document.getElementById("sobreNosotros")
 const footer = document.getElementById("copy")
 const container = document.getElementById("container")
 const categoria = document.getElementsByClassName("titulo")[0].innerHTML;
+const total = document.getElementsByClassName("total")
 const carrito = []
 
 
@@ -93,11 +94,12 @@ function calcularCarrito(){
     carrito.forEach((moto) => {
         sumaTotal += moto.precio
     } )
-    alert("El importe del carrito es de: us$" +sumaTotal)
+    total.innerHTML = `total: ${sumaTotal}`
 }
 
 function cargarCarrito(array){
     recuperarCarrito()
+    calcularCarrito()
     container.innerHTML = ""
     if(array.length > 0){
         array.forEach((moto) => {
