@@ -3,58 +3,28 @@ const footer = document.getElementById("copy")
 const container = document.getElementById("container")
 const categoria = document.getElementsByClassName("titulo")[0].innerHTML;
 const total = document.getElementsByClassName("total")
+const logo = document.getElementsByClassName("logo")
+const containerCarrito = document.getElementById("containerCarrito")
+const imagenLogo = "./img/GMmotos.jpg"
 const carrito = []
 
-
-// sobreNosotros.textContent = "Sobre nosotros"
+logo.src = imagenLogo
+// sobreNosotros.innerHTML = "Sobre nosotros"
 footer.innerHTML = "Copyright GM motos - 2022. Todos los derechos reservados."
 
-
-function cargarMotos(motos){
+function cargarProducts(){
     container.innerHTML = ""
-    if(motos.length > 0){
-        let motosFiltrado = motos.filter(moto=>moto.marca===categoria)
-        motosFiltrado.forEach((moto) => {
-            container.innerHTML += cardMoto(moto)
+    if(productos.length > 0){
+        let productosFiltrado = productos.filter(producto => producto.categoria === categoria)
+        productosFiltrado.forEach((producto)=>{
+            container.innerHTML += cardProducts(producto)
         })
-    }else {
-        container.innerHTML = retornoCardErrorHTML()
-    }   
+    }
 }
+cargarProducts()
 
-function cargarCascos(cascos){
-    container.innerHTML = ""
-    if(cascos.length > 0){
-        cascos.forEach((casco) => {
-        container.innerHTML += cardCasco(casco)
-    })
-    }else {
-        container.innerHTML = retornoCardErrorHTML()
-    }   
-}
 
-function cargarGuantes(guantes){
-    container.innerHTML = ""
-    if(guantes.length > 0){
-        guantes.forEach((guante) => {
-        container.innerHTML += cardGuante(guante)
-    })
-    }else {
-        container.innerHTML = retornoCardErrorHTML()
-    }   
-}
-
-if(categoria==="KAWASAKI" || categoria==="YAMAHA" || categoria==="HONDA"  ||categoria==="BENELLI"){
-    cargarMotos(motos)
-}else if(categoria==="CASCOS"){
-    cargarCascos(cascos)
-}else if(categoria==="GUANTES"){
-    cargarGuantes(guantes)
-}else if(categoria === "CARRITO"){
-    cargarCarrito(carrito)
-}
-
-function clickEnBotonesMoto(){
+function clickBotonProducts(){
     const btnComprar = document.querySelectorAll("button.button.button-outline.button-add")
         for (boton of btnComprar){
             boton.addEventListener("click", (e) => {
@@ -65,10 +35,10 @@ function clickEnBotonesMoto(){
             })
         }
 }
-clickEnBotonesMoto()
+clickBotonProducts()
 
 function agregarAlCarrito(id){
-    let resultado = motos.find(moto => moto.id === parseInt(id)) || ''
+    let resultado = productos.find(producto => producto.id === parseInt(id)) || ''
     if (resultado !== undefined){
         carrito.push(resultado)
         console.log("Se agregó el producto", resultado.modelo, "al carrito")
@@ -91,8 +61,8 @@ function recuperarCarrito(){
 
 function calcularCarrito(){
     let sumaTotal = 0
-    carrito.forEach((moto) => {
-        sumaTotal += moto.precio
+    carrito.forEach((producto) => {
+        sumaTotal += producto.precio
     } )
     total.innerHTML = `total: ${sumaTotal}`
 }
@@ -100,12 +70,13 @@ function calcularCarrito(){
 function cargarCarrito(array){
     recuperarCarrito()
     calcularCarrito()
-    container.innerHTML = ""
+    containerCarrito.innerHTML = ""
     if(array.length > 0){
-        array.forEach((moto) => {
-            container.innerHTML += cardMoto(moto)
+        array.forEach((producto) => {
+            containerCarrito.innerHTML += cardProducts(producto)
         })
     }else {
-        container.innerHTML = retornoCardErrorHTML()
+        containerCarrito.innerHTML = retornoCardErrorHTML()
     }   
 }
+cargarCarrito(carrito)
