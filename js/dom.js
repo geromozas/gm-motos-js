@@ -6,7 +6,7 @@ const total = document.getElementsByClassName("total")
 const logo = document.getElementsByClassName("logo")
 const containerCarrito = document.getElementById("containerCarrito")
 const imagenLogo = "./img/GMmotos.jpg"
-const carrito = []
+const carrito = JSON.parse(localStorage.getItem("carritoProductos")) || []
 
 logo.src = imagenLogo
 // sobreNosotros.innerHTML = "Sobre nosotros"
@@ -21,7 +21,9 @@ function cargarProducts(){
         })
     }
 }
-cargarProducts()
+if(container){
+    cargarProducts()
+}
 
 
 function clickBotonProducts(){
@@ -79,4 +81,6 @@ function cargarCarrito(array){
         containerCarrito.innerHTML = retornoCardErrorHTML()
     }   
 }
-cargarCarrito(carrito)
+if(containerCarrito){
+    cargarCarrito(carrito)
+}
