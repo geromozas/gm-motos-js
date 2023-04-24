@@ -9,6 +9,17 @@ function cardProducts (producto){
             </div>` 
 }
 
+function cardCarrito (producto){
+    return `<div class="card">
+                <div class="card-image"><img src="${producto.imagen}"></div>
+                <div class="card-model">${producto.modelo}</div>
+                <div class="card-price">us$ ${producto.precio}</div>
+                <div class="card-button">
+                    <button class="button button-outline button-eliminate" id="${producto.id}" title="Clic para eliminar del carrito">-</button>
+                </div>
+            </div>`
+}
+
 function retornoCardErrorHTML(){
     return `<div class="card-error">
                 <h2>Houston, tenemos un problema 🔌</h2>

@@ -1,4 +1,3 @@
-const sobreNosotros = document.getElementById("sobreNosotros")
 const footer = document.getElementById("copy")
 const container = document.getElementById("container")
 const categoria = document.getElementsByClassName("titulo")[0].innerHTML;
@@ -9,7 +8,6 @@ const imagenLogo = "./img/GMmotos.jpg"
 const carrito = JSON.parse(localStorage.getItem("carritoProductos")) || []
 
 logo.src = imagenLogo
-// sobreNosotros.innerHTML = "Sobre nosotros"
 footer.innerHTML = "Copyright GM motos - 2022. Todos los derechos reservados."
 
 function cargarProducts(){
@@ -25,19 +23,16 @@ if(container){
     cargarProducts()
 }
 
-
-function clickBotonProducts(){
+function clickBotonMas(){
     const btnComprar = document.querySelectorAll("button.button.button-outline.button-add")
         for (boton of btnComprar){
             boton.addEventListener("click", (e) => {
                 agregarAlCarrito(e.target.id)
             })
-            boton.addEventListener("mousemove", (e)=>{
-                let codigo = parseInt(e.target.title = `Agregar al carrito`)
-            })
+            boton.title = "Agregar al carrito";
         }
 }
-clickBotonProducts()
+clickBotonMas()
 
 function agregarAlCarrito(id){
     let resultado = productos.find(producto => producto.id === parseInt(id)) || ''
@@ -70,12 +65,11 @@ function calcularCarrito(){
 }
 
 function cargarCarrito(array){
-    recuperarCarrito()
     calcularCarrito()
     containerCarrito.innerHTML = ""
     if(array.length > 0){
         array.forEach((producto) => {
-            containerCarrito.innerHTML += cardProducts(producto)
+            containerCarrito.innerHTML += cardCarrito(producto)
         })
     }else {
         containerCarrito.innerHTML = retornoCardErrorHTML()
@@ -83,4 +77,25 @@ function cargarCarrito(array){
 }
 if(containerCarrito){
     cargarCarrito(carrito)
+}
+
+function clickBotonMenos(){
+    const btnEliminar = document.querySelectorAll("button button-outline button-eliminate")
+        for (boton of btnEliminar){
+            boton.addEventListener("click", (e) => {
+                eliminarProducto(e.target.id)
+            })
+            boton.title = "Eliminar del carrito";
+        }
+}
+clickBotonMenos()
+
+function eliminarProducto(id){
+    let resultado = productos.find(producto => producto.id === parseInt(id)) || ''
+    if (resultado !== undefined){
+        let carrito = carrito.filter(producto => producto.id !== parseInt(id))
+        carrito.slice(resultado)
+        console.log("Se elinino el producto", resultado.modelo, "del carrito")
+        guardarElCarrito(carrito)
+    }
 }
