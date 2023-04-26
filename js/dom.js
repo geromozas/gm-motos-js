@@ -30,7 +30,7 @@ function clickBotonMas(){
             boton.addEventListener("click", (e) => {
                 agregarAlCarrito(e.target.id)
             })
-            boton.title = "Agregar al carrito";
+            boton.title = "Click para agregar al carrito";
         }
 }
 clickBotonMas()
@@ -39,7 +39,6 @@ function agregarAlCarrito(id){
     let resultado = productos.find(producto => producto.id === parseInt(id)) || ''
     if (resultado !== undefined){
         carrito.push(resultado)
-        console.log("Se agregÃ³ el producto", resultado.modelo, "al carrito")
         guardarElCarrito(carrito)
     }
 }
@@ -62,7 +61,7 @@ function cargarCarrito(array){
     if(array.length > 0){
         array.forEach((producto) => {
             containerCarrito.innerHTML += cardCarrito(producto)
-        })
+        }) 
     }else {
         containerCarrito.innerHTML = retornoCardErrorHTML()
     }
