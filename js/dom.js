@@ -1,11 +1,12 @@
 const footer = document.getElementById("copy")
 const container = document.getElementById("container")
 const categoria = document.getElementsByClassName("titulo")[0].innerHTML;
-const total = document.getElementById("total")
+const total = document.getElementById("Total")
 const logo = document.getElementsByClassName("logo")
 const containerCarrito = document.getElementById("containerCarrito")
-const imagenLogo = "./img/GMmotos.jpg"
-const carrito = JSON.parse(localStorage.getItem("carritoProductos")) || []
+const imagenLogo = "./img/GMmotos.jpg";
+
+let carrito = JSON.parse(localStorage.getItem("carritoProductos")) || []
 
 logo.src = imagenLogo
 footer.innerHTML = "Copyright GM motos - 2022. Todos los derechos reservados."
@@ -38,7 +39,7 @@ function agregarAlCarrito(id){
     let resultado = productos.find(producto => producto.id === parseInt(id)) || ''
     if (resultado !== undefined){
         carrito.push(resultado)
-        console.log("Se agregó el producto", resultado.modelo, "al carrito")
+        console.log("Se agregÃ³ el producto", resultado.modelo, "al carrito")
         guardarElCarrito(carrito)
     }
 }
@@ -52,10 +53,9 @@ function guardarElCarrito(carrito){
 function recuperarCarrito(){
     const carritoRecuperado = JSON.parse(localStorage.getItem("carritoProductos"))
     if (carritoRecuperado.length > 0){
-        carrito.push(...carritoRecuperado)
+        carrito.push(carritoRecuperado)
     }
 }
-
 
 function cargarCarrito(array){
     containerCarrito.innerHTML = ""
@@ -65,48 +65,29 @@ function cargarCarrito(array){
         })
     }else {
         containerCarrito.innerHTML = retornoCardErrorHTML()
-    }   
+    }
+    calcularCarrito()   
 }
 if(containerCarrito){
     cargarCarrito(carrito)
 }
 
-function clickBotonMenos(){
-    const btnEliminar = document.querySelectorAll("button button-outline button-eliminate")
-        for (boton of btnEliminar){
-            boton.addEventListener("click", (e) => {
-                eliminarProducto(e.target.id)
-            })
-            boton.title = "Eliminar del carrito";
-        }
-}
-clickBotonMenos()
-
 function actualizarCarrito(){
     let aux = "";
     carrito.forEach((producto) => {
-        aux += `<div class="card">
-                    <div class="card-image"><img src="${producto.imagen}"></div>
-                    <div class="card-model">${producto.modelo}</div>
-                    <div class="card-price">us$ ${producto.precio}</div>
-                    <div class="card-button">
-                        <button onClick = "eliminarDelCarrito("${producto.id})" class="button button-outline button-eliminate" id=" title="Clic para eliminar del carrito">-</button>
-                    </div>
-                </div>`
+        aux += cardCarrito(producto)
     })
-    carrito.innerHTML = aux;
+    containerCarrito.innerHTML = aux;
+    calcularCarrito()
 }
 
 const eliminarDelCarrito = (id) => {
-    const producto = carrito.find((producto) => producto.id === id);
-    carrito.splice(carrito.indexOf(producto), 1);
+    const producto = carrito.find(producto => producto.id === id);
+    let indice = carrito.indexOf(producto);
+    carrito.splice(indice, 1);
+    console.log('carrito actualizado',carrito);
     actualizarCarrito();
 }
-// function eliminarProducto(id){
-//     let resultado = carrito.find(producto => producto.id === parseInt(id)) ||''
-//     carrito.splice(carrito.indexOF(producto), 1)
-//     actualizarCarrito()
-// }
 
 function calcularCarrito(){
     let sumaTotal = 0
@@ -115,4 +96,3 @@ function calcularCarrito(){
     } )
     total.innerHTML = sumaTotal
 }
-calcularCarrito()

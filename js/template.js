@@ -15,7 +15,7 @@ function cardCarrito (producto){
                 <div class="card-model">${producto.modelo}</div>
                 <div class="card-price">us$ ${producto.precio}</div>
                 <div class="card-button">
-                    <button class="button button-outline button-eliminate" id="${producto.id}" title="Clic para eliminar del carrito">-</button>
+                    <button onClick="eliminarDelCarrito(${producto.id})" class="button button-outline button-eliminate" title="Clic para eliminar del carrito">-</button>
                 </div>
             </div>`
 }
