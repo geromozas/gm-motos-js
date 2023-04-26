@@ -1,7 +1,7 @@
 const footer = document.getElementById("copy")
 const container = document.getElementById("container")
 const categoria = document.getElementsByClassName("titulo")[0].innerHTML;
-const total = document.getElementsByClassName("total")
+const total = document.getElementById("total")
 const logo = document.getElementsByClassName("logo")
 const containerCarrito = document.getElementById("containerCarrito")
 const imagenLogo = "./img/GMmotos.jpg"
@@ -56,16 +56,8 @@ function recuperarCarrito(){
     }
 }
 
-function calcularCarrito(){
-    let sumaTotal = 0
-    carrito.forEach((producto) => {
-        sumaTotal += producto.precio
-    } )
-    total.innerHTML = `total: ${sumaTotal}`
-}
 
 function cargarCarrito(array){
-    calcularCarrito()
     containerCarrito.innerHTML = ""
     if(array.length > 0){
         array.forEach((producto) => {
@@ -90,12 +82,37 @@ function clickBotonMenos(){
 }
 clickBotonMenos()
 
-function eliminarProducto(id){
-    let resultado = productos.find(producto => producto.id === parseInt(id)) || ''
-    if (resultado !== undefined){
-        let carrito = carrito.filter(producto => producto.id !== parseInt(id))
-        carrito.slice(resultado)
-        console.log("Se elinino el producto", resultado.modelo, "del carrito")
-        guardarElCarrito(carrito)
-    }
+function actualizarCarrito(){
+    let aux = "";
+    carrito.forEach((producto) => {
+        aux += `<div class="card">
+                    <div class="card-image"><img src="${producto.imagen}"></div>
+                    <div class="card-model">${producto.modelo}</div>
+                    <div class="card-price">us$ ${producto.precio}</div>
+                    <div class="card-button">
+                        <button onClick = "eliminarDelCarrito("${producto.id})" class="button button-outline button-eliminate" id=" title="Clic para eliminar del carrito">-</button>
+                    </div>
+                </div>`
+    })
+    carrito.innerHTML = aux;
 }
+
+const eliminarDelCarrito = (id) => {
+    const producto = carrito.find((producto) => producto.id === id);
+    carrito.splice(carrito.indexOf(producto), 1);
+    actualizarCarrito();
+}
+// function eliminarProducto(id){
+//     let resultado = carrito.find(producto => producto.id === parseInt(id)) ||''
+//     carrito.splice(carrito.indexOF(producto), 1)
+//     actualizarCarrito()
+// }
+
+function calcularCarrito(){
+    let sumaTotal = 0
+    carrito.forEach((producto) => {
+        sumaTotal += producto.precio 
+    } )
+    total.innerHTML = sumaTotal
+}
+calcularCarrito()
