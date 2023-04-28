@@ -17,16 +17,11 @@
 
 body {
     margin: 0;
-    background-color: #efefee; 
+    background-color: #efefee;
 }
 
 .titulo {
     margin: 30px;
-    text-align: center; 
-}
-
-.textomoto {
-    font-size: 25px;
     text-align: center; 
 }
 
@@ -68,7 +63,7 @@ footer {
     justify-content: space-around;
     align-items: center;
     background-color: #212529;
-    height: 100px; 
+    height: 100px;
 }
 
 footer p {
@@ -90,29 +85,6 @@ footer div svg:hover {
     color: rgba(255, 255, 255, 0.75); 
 }
 
-.textomoto {
-    font-size: 25px;
-    text-align: center; 
-}
-
-h5 {
-    margin-left: 30px; 
-}
-
-form {
-    width: 600px;
-    margin: auto; 
-}
-
-form input {
-    width: 100%;
-    margin-bottom: 20px; 
-}
-
-form textarea {
-    width: 100%; 
-}
-
 @media (max-width: 800px) {
     .logo {
     padding: 10px;
@@ -122,11 +94,6 @@ form textarea {
 @media (max-width: 650px) {
     .container div {
         width: 300px; 
-}
-
-.motoimg {
-    width: 300px;
-    margin: 0; 
 }
 
 .carousel-inner {
@@ -142,12 +109,3 @@ form {
     padding: 10px;}
 }
 
-@media (max-width: 450px) {
-    footer p {
-    font-size: 10px; } 
-}
-
-@media (max-width: 1000px) {
-    .grid-layout {
-        grid-template-columns: auto; } 
-}

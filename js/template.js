@@ -15,16 +15,8 @@ function cardCarrito (producto){
                 <div class="card-model">${producto.modelo}</div>
                 <div class="card-price">us$ ${producto.precio}</div>
                 <div class="card-button">
-                    <button onClick="eliminarDelCarrito(${producto.id})" class="button button-outline button-eliminate" title="Click para eliminar del carrito">-</button>
+                    <button onClick="eliminarDelCarrito(${producto.id})" class="button button-outline button-eliminate" title="Click para eliminar del carrito">x</button>
                 </div>
-            </div>`
-}
-
-function retornoCardErrorHTML(){
-    return `<div class="card-error">
-                <h2>Houston, tenemos un problema 🔌</h2>
-                <h3>No pudimos cargar los productos. 🤦🏻‍♂️</h3>
-                <h3>Intenta nuevamente en unos instantes...</h3>
             </div>`
 }
 

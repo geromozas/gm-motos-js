@@ -5,11 +5,22 @@ const total = document.getElementById("Total")
 const logo = document.getElementsByClassName("logo")
 const containerCarrito = document.getElementById("containerCarrito")
 const imagenLogo = "./img/GMmotos.jpg";
-
+const finalizarCompra = document.querySelector("#comprar")
+const vaciarCarrito = document.querySelector('#vaciarCarrito')
 let carrito = JSON.parse(localStorage.getItem("carritoProductos")) || []
+const URL = "js\products.json"
+const productos = []
 
 logo.src = imagenLogo
 footer.innerHTML = "Copyright GM motos - 2022. Todos los derechos reservados."
+
+function obtenerProductos(){
+    fetch(URL)
+    .then(response => response.jason())
+    .then(data => productos.push(...data))
+    .then(() => cargarProducts(productos))
+    .catch(error => console.log(error))
+}
 
 function cargarProducts(){
     container.innerHTML = ""
@@ -21,7 +32,7 @@ function cargarProducts(){
     }
 }
 if(container){
-    cargarProducts()
+    obtenerProductos()
 }
 
 function clickBotonMas(){
@@ -35,25 +46,27 @@ function clickBotonMas(){
 }
 clickBotonMas()
 
+function alertaCarrito() {
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Se ha agregado al carrito',
+        showConfirmButton: false,
+        timer: 1000
+    })
+}
+
 function agregarAlCarrito(id){
     let resultado = productos.find(producto => producto.id === parseInt(id)) || ''
     if (resultado !== undefined){
         carrito.push(resultado)
         guardarElCarrito(carrito)
+        alertaCarrito()
     }
 }
 
 function guardarElCarrito(carrito){
-    if (carrito.length > 0){
-        localStorage.setItem("carritoProductos", JSON.stringify(carrito))
-    }
-}
-
-function recuperarCarrito(){
-    const carritoRecuperado = JSON.parse(localStorage.getItem("carritoProductos"))
-    if (carritoRecuperado.length > 0){
-        carrito.push(carritoRecuperado)
-    }
+    localStorage.setItem("carritoProductos", JSON.stringify(carrito))
 }
 
 function cargarCarrito(array){
@@ -63,7 +76,7 @@ function cargarCarrito(array){
             containerCarrito.innerHTML += cardCarrito(producto)
         }) 
     }else {
-        containerCarrito.innerHTML = retornoCardErrorHTML()
+        containerCarrito.innerHTML = `carrito vacio`
     }
     calcularCarrito()   
 }
@@ -86,6 +99,7 @@ const eliminarDelCarrito = (id) => {
     carrito.splice(indice, 1);
     console.log('carrito actualizado',carrito);
     actualizarCarrito();
+    guardarElCarrito(carrito);
 }
 
 function calcularCarrito(){
@@ -95,3 +109,21 @@ function calcularCarrito(){
     } )
     total.innerHTML = sumaTotal
 }
+
+function alertCompra(){
+    Swal.fire(
+        'Muchas gracias por su compra',
+        'Por vía mail recibira su factura',
+    )
+}
+
+finalizarCompra.addEventListener("click", ()=> {
+    alertCompra()
+    localStorage.removeItem("carritoProductos")
+})
+
+vaciarCarrito.addEventListener('click', () => {
+    carrito.splice(0, carrito.length);
+    localStorage.removeItem("carritoProductos")
+    actualizarCarrito()
+});
