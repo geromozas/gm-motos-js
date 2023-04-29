@@ -120,4 +120,4 @@ vaciarCarrito.addEventListener('click', () => {
     carrito.splice(0, carrito.length);
     localStorage.removeItem("carritoProductos")
     actualizarCarrito()
-});
+})
