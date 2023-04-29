@@ -105,7 +105,7 @@ function calcularCarrito(){
 function alertCompra(){
     Swal.fire(
         'Muchas gracias por su compra',
-        'Por vía mail recibira su factura',
+        'Recibira su factura por vía mail',
     )
 }
 
