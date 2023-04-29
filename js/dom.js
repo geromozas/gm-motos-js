@@ -5,8 +5,6 @@ const total = document.getElementById("Total")
 const logo = document.getElementsByClassName("logo")
 const containerCarrito = document.getElementById("containerCarrito")
 const imagenLogo = "./img/GMmotos.jpg";
-const finalizarCompra = document.getElementsByClassName("comprar")
-const vaciarCarrito = document.getElementsByClassName("vaciarCarrito")
 let carrito = JSON.parse(localStorage.getItem("carritoProductos")) || []
 const carritoVacio = document.getElementById("carritoVacio")
 const URL = "../js/products.json"
@@ -111,13 +109,15 @@ function alertCompra(){
     )
 }
 
-finalizarCompra.addEventListener("click", ()=> {
-    alertCompra()
-    localStorage.removeItem("carritoProductos")
-})
-
-vaciarCarrito.addEventListener('click', () => {
+function vaciarCarrito(){
     carrito.splice(0, carrito.length);
     localStorage.removeItem("carritoProductos")
     actualizarCarrito()
-})
+}
+
+function finalizarCompra(){
+    alertCompra()
+    carrito.splice(0, carrito.length);
+    localStorage.removeItem("carritoProductos")
+    actualizarCarrito()
+}
