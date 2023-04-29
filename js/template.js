@@ -4,7 +4,7 @@ function cardProducts (producto){
                 <div class="card-model">${producto.modelo}</div>
                 <div class="card-price">us$ ${producto.precio}</div>
                 <div class="card-button">
-                    <button class="button button-outline button-add" id="${producto.id}" title="Clic para agregar al carrito">+</button>
+                    <button onClick="clickBotonMas(${producto.id})" class="button button-outline button-add" id="${producto.id}" title="Clic para agregar al carrito">+</button>
                 </div>
             </div>` 
 }
@@ -20,3 +20,8 @@ function cardCarrito (producto){
             </div>`
 }
 
+function cardCarritoVacio(){
+    return `<div class="cardCarritoVacio">
+                <h3>Carrito vacio</h3>
+            </div>`
+}

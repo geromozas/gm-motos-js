@@ -15,14 +15,13 @@
     border-radius: 0.3rem; 
 }
 
-body {
-    margin: 0;
-    background-color: #efefee;
-}
-
 .titulo {
     margin: 30px;
     text-align: center; 
+}
+
+.card{
+    width: 400px !important;
 }
 
 section {
@@ -57,13 +56,27 @@ section {
     justify-content: right;
 }
 
+
+body {
+    margin: 0;
+    background-color: #efefee;
+    position: relative;
+    padding-bottom: 200px;
+}
+
+main{
+    min-height: 50vh;
+}
+
 footer {
     display: flex;
-    flex-direction: row;
     justify-content: space-around;
     align-items: center;
     background-color: #212529;
-    height: 100px;
+    height: 100px;   
+    width: 100%;
+    position: absolute;
+    bottom: 0;
 }
 
 footer p {
@@ -93,19 +106,50 @@ footer div svg:hover {
 
 @media (max-width: 650px) {
     .container div {
-        width: 300px; 
+        width: 100%; 
+    }
+
+    .carousel-inner {
+        height: 200px; 
+    }
+
+    footer p {
+        margin-left: 10px; 
+    }
+
+    form {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .card-image img{
+        width: 250px;
+    }
 }
 
-.carousel-inner {
-    height: 200px; 
+.cardCarritoVacio{
+    display: flex;
+    justify-content: center;
 }
 
-footer p {
-    margin-left: 10px; 
+.sumaTotal{
+    display: flex;
+    justify-content: center;
+    border-radius: 0.5rem;
+    transition: box-shadow 0.5s ease;
+    box-shadow: 0 0.1rem 0.4rem rgba(0,0,0,0.3);
 }
 
-form {
-    width: 100%;
-    padding: 10px;}
+.buttonContainer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 150px;
 }
 
+.buttonContainer button{
+    height: 50px;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+}

@@ -5,10 +5,11 @@ const total = document.getElementById("Total")
 const logo = document.getElementsByClassName("logo")
 const containerCarrito = document.getElementById("containerCarrito")
 const imagenLogo = "./img/GMmotos.jpg";
-const finalizarCompra = document.querySelector("#comprar")
-const vaciarCarrito = document.querySelector('#vaciarCarrito')
+const finalizarCompra = document.querySelector(".comprar")
+const vaciarCarrito = document.querySelector('.vaciarCarrito')
 let carrito = JSON.parse(localStorage.getItem("carritoProductos")) || []
-const URL = "js\products.json"
+const carritoVacio = document.getElementById("carritoVacio")
+const URL = "../js/products.json"
 const productos = []
 
 logo.src = imagenLogo
@@ -16,7 +17,7 @@ footer.innerHTML = "Copyright GM motos - 2022. Todos los derechos reservados."
 
 function obtenerProductos(){
     fetch(URL)
-    .then(response => response.jason())
+    .then(response => response.json())
     .then(data => productos.push(...data))
     .then(() => cargarProducts(productos))
     .catch(error => console.log(error))
@@ -35,16 +36,9 @@ if(container){
     obtenerProductos()
 }
 
-function clickBotonMas(){
-    const btnComprar = document.querySelectorAll("button.button.button-outline.button-add")
-        for (boton of btnComprar){
-            boton.addEventListener("click", (e) => {
-                agregarAlCarrito(e.target.id)
-            })
-            boton.title = "Click para agregar al carrito";
-        }
+function clickBotonMas(id){
+    agregarAlCarrito(id)
 }
-clickBotonMas()
 
 function alertaCarrito() {
     Swal.fire({
@@ -76,7 +70,7 @@ function cargarCarrito(array){
             containerCarrito.innerHTML += cardCarrito(producto)
         }) 
     }else {
-        containerCarrito.innerHTML = `carrito vacio`
+        containerCarrito.innerHTML = cardCarritoVacio()
     }
     calcularCarrito()   
 }
